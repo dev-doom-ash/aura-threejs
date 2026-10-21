@@ -1,8 +1,16 @@
 @import "tailwindcss";
 
+@property --accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #9b8cff;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --accent: #9b8cff;
+  --background: #05060a;
+  --foreground: #ededed;
+  transition: --accent 0.8s ease;
 }
 
 @theme inline {
@@ -12,15 +20,30 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--background);
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--accent) 22%, #05060a) 0%, #05060a 65%) fixed;
+  overflow-x: hidden;
+}
+
+@media (pointer: fine) {
+  html,
+  body,
+  a,
+  button {
+    cursor: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
